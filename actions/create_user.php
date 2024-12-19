@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Mot de passe invalide. Il doit contenir des majuscules, minuscules, chiffres et caractères spéciaux.");
     }
 
-    // // Vérification de l'unicité de l'email
+    // 
     // $sql = "SELECT COUNT(*) FROM utilisateur WHERE email = ?";
     // $stmt = $mysqli->prepare($sql);
     // $stmt->bind_param("s", $email);  
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //     die("L'email est déjà utilisé.");
     // }
 
-    // // Vérification de l'unicité du nom d'utilisateur
+    // 
     // $sql = "SELECT COUNT(*) FROM utilisateur WHERE nom = ?";
     // $stmt = $mysqli->prepare($sql);
     // $stmt->bind_param("s", $nom);  
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //     die("Le nom d'utilisateur est déjà pris.");
     // }
 
-    // Hachage du mot de passe
+  
     $mot_de_passe_hashed = password_hash($mot_de_passe, PASSWORD_DEFAULT); 
 
     // Insertion de l'utilisateur dans la base de données
