@@ -1,0 +1,43 @@
+-- Table utilisateur
+CREATE TABLE utilisateur (
+    id_utilisateur INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    mot_de_passe VARCHAR(255) NOT NULL,
+    role ENUM('etudiant', 'professeur') NOT NULL
+);
+
+-- Table categorie
+CREATE TABLE categorie (
+    id_categorie INT AUTO_INCREMENT PRIMARY KEY,
+    nom_categorie VARCHAR(100) NOT NULL
+);
+
+-- Table auteur
+CREATE TABLE auteur (
+    id_auteur INT AUTO_INCREMENT PRIMARY KEY,
+    nom_auteur VARCHAR(100) NOT NULL
+);
+
+-- Table livre
+CREATE TABLE livre (
+    id_livre INT AUTO_INCREMENT PRIMARY KEY,
+    titre VARCHAR(255) NOT NULL,
+    id_auteur INT NOT NULL,
+    id_categorie INT NOT NULL,
+    disponible BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (id_auteur) REFERENCES auteur(id_auteur) ON DELETE CASCADE,
+    FOREIGN KEY (id_categorie) REFERENCES categorie(id_categorie) ON DELETE CASCADE
+);
+
+-- Table emprunt
+CREATE TABLE emprunt (
+    id_emprunt INT AUTO_INCREMENT PRIMARY KEY,
+    id_utilisateur INT NOT NULL,
+    id_livre INT NOT NULL,
+    date_emprunt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    date_retour TIMESTAMP NULL,
+    statut ENUM('en attente', 'validé', 'retourné') DEFAULT 'en attente',
+    FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur) ON DELETE CASCADE,
+    FOREIGN KEY (id_livre) REFERENCES livre(id_livre) ON DELETE CASCADE
+);
